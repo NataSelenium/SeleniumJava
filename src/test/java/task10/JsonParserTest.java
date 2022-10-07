@@ -5,23 +5,25 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import parser.JsonParser;
+import parser.NoSuchFileException;
 import parser.Parser;
 import shop.Cart;
 import shop.RealItem;
+import shop.VirtualItem;
 
 import java.io.File;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class JsonParserTest {
-    Cart fruitCart = new Cart("fruit-cart");
-    RealItem fruit = new RealItem();
+
+    TestHelper testHelper = new TestHelper();
+
+    double expectedTotal;
     @BeforeAll
     static void setUp() {
         System.out.println("Start to testing of JsonParser class...");
@@ -32,51 +34,66 @@ class JsonParserTest {
         System.out.println("End to testing of JsonParser class...");
     }
 
-    @ParameterizedTest
-    @CsvSource({
-            "apple,         1.5,     1",
-            "banana,        2.1,     1.5",
-            "lemon,         3,       0.8",
-            "strawberry,    10.5,    1.2",
-            "orange,        2.5,     2.3"
-    })
-    void writeToFileWithCsvSourceTest(String fruitName, double price, double weight) {
-        fruit.setName(fruitName);
-        fruit.setPrice(price);
-        fruit.setWeight(weight);
-        assertAll("fruit",
-                () -> assertNotNull(fruit.getName()),
-                () -> assertNotNull(fruit.getPrice()),
-                () -> assertNotNull(fruit.getWeight())
-        );
+    @Test
+    void writeToFileTest() {
+        Cart fruitCart = new Cart("fruitCart");
+        RealItem fruit = new RealItem();
+        fruit.setName("Mandarin");
+        fruit.setPrice(2.5);
+        fruit.setWeight(1.2);
         fruitCart.addRealItem(fruit);
-        System.out.println("total is: " + fruitCart.getTotalPrice());
+        String path = "src/main/resources/" + fruitCart.getCartName() + ".json";
         Parser parser = new JsonParser();
-    if (fruit.getName() == "strawberry") {
-    parser.writeToFile(fruitCart);
-    System.out.println("Fruit cart with strawberry is ready!");
-        }
+        parser.writeToFile(fruitCart);
+        Cart fruityCart =  testHelper.myReadFromFileTestMethod(new File(path));
+        expectedTotal = fruit.getPrice() + fruit.getPrice()*0.2;
+        assertEquals(expectedTotal,fruityCart.getTotalPrice());
     }
-
 
     @Test
     void readFromFileTest() {
-        Path path = Paths.get( "src/main/resources/eugen-cart.json");
-        assertTrue(Files.exists(path), "File exists");
+        Cart goods = new Cart("nataCart");
+        RealItem car = new RealItem();
+        car.setName("Reno");
+        car.setPrice(25023.5);
+        car.setWeight(1230);
+        VirtualItem movie = new VirtualItem();
+        movie.setName("Comedy");
+        movie.setPrice(16);
+        movie.setSizeOnDisk(150000);
+        goods.addRealItem(car);
+        goods.addVirtualItem(movie);
+        goods.showItems();
+        String path = "src/main/resources/" + goods.getCartName() + ".json";
+        testHelper.myWriteCartTestMethod(goods, path);
         Parser parser = new JsonParser();
-        Cart eugenCart = parser.readFromFile(new File(path.toString()));
-        assertTrue(eugenCart.getTotalPrice() < 26700, "Total price is not greater 26700");
+        Cart nataCart = parser.readFromFile(new File(path.toString()));
+        expectedTotal = car.getPrice() + car.getPrice()*0.2 + movie.getPrice() + movie.getPrice()*0.2;
+        assertEquals(expectedTotal,nataCart.getTotalPrice());
+    }
+
+    @Test
+    void readFromFileExceptionTest() {
+        Path path = Paths.get( "src/main/resources/xxxx-cart.json");
+        Parser parser = new JsonParser();
+        Exception exception = assertThrows(NoSuchFileException.class, () -> {
+            parser.readFromFile(new File(path.toString()));
+        });
+        String expectedMessage = "json not found";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+        System.out.println("The actual exception message: " + actualMessage);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = { "e", "g", "-", "a", "t" })
+    @ValueSource(strings = { "#", "$", "@", "*", "&" })
     void readFromFileWithValueSourceTest(String argument) {
         Path path = Paths.get( "src/main/resources/eugen-cart.json");
         Parser parser = new JsonParser();
         Cart eugenCart = parser.readFromFile(new File(path.toString()));
         assertNotNull(argument);
-        assertTrue(eugenCart.getCartName().contains(argument));
-        System.out.println("The cart name contain letter: " + argument);
+        assertFalse(eugenCart.getCartName().contains(argument));
+        System.out.println("The cart name does not contain symbol: " + argument);
     }
 
     @Disabled("This test will not be run")
@@ -85,4 +102,6 @@ class JsonParserTest {
     {
         System.out.println("Error! The test was run :(");
     }
+
+
 }
