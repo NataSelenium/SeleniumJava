@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="my suite3" parallel="methods" thread-count="5">
+    <test verbose="2" preserve-order="true" name="D:/JavaProjects/SeleniumJava/src/main/resources">
+        <groups>
+            <run>
+                <include name="files"/>
+                <include name="total.*"/>
+                <exclude name="custom method"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="task20.JsonParserTest">
+                <methods>
+                    <include name="writeToFileTest"/>
+                    <include name="readFromFileTest"/>
+                    <include name="readFromFileExceptionTest"/>
+                    <include name="readFromFileWithValueSourceTest"/>
+                    <exclude name="disabledTest"/>
+                </methods>
+            </class>
+            <class name="task20.CartTest"/>
+        </classes>
+    </test>
+</suite>

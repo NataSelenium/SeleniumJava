@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="my suite2">
+    <parameter name="game-name"  value="Tetris"/>
+    <parameter name="game-price"  value="15.7"/>
+    <parameter name="game-size"  value="260.0"/>
+    <test verbose="2" preserve-order="true" name="D:/JavaProjects/SeleniumJava/src/main/resources">
+        <groups>
+            <run>
+                <include name="cart.*"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="task20.RealItemTest">
+                <methods>
+                    <include name="getNameTest"/>
+                </methods>
+            </class>
+            <class name="task20.VirtualItemTest">
+                <methods>
+                    <include name="getVirtualItemPropertiesTest"/>
+                    <include name="getVirtualItemPropertiesWithParametersTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

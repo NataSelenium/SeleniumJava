@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="D:/JavaProjects/SeleniumJava/src/main/resources">
+        <groups>
+            <run>
+                <exclude name="broken"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="task20.CartTest">
+                <methods>
+                    <include name="cartAddRealItemTest"/>
+                    <include name="cartAddVirtualItemTest"/>
+                    <include name="cartDeleteRealItemTest"/>
+                    <include name="cartDeleteVirtualItemTest"/>
+                </methods>
+            </class>
+            <class name="task20.JsonParserTest">
+                <methods>
+                    <include name="writeToFileTest"/>
+                    <include name="readFromFileTest"/>
+                    <include name="readFromFileExceptionTest"/>
+                    <include name="readFromFileWithValueSourceTest"/>
+                    <include name="disabledTest"/>
+                </methods>
+            </class>
+            <class name="task20.RealItemTest">
+                <methods>
+                    <include name="getNameTest"/>
+                </methods>
+            </class>
+            <class name="task20.VirtualItemTest">
+                <methods>
+                    <include name="getVirtualItemPropertiesTest"/>
+                    <exclude name="getVirtualItemPropertiesWithParametersTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
