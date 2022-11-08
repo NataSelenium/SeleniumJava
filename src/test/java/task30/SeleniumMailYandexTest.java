@@ -15,7 +15,7 @@ import java.time.Duration;
 
 public class SeleniumMailYandexTest {
     private WebDriver driver;
-    private String log_name = "RoseMagic16";
+    private String logName = "RoseMagic16";
     private String pass = "NovemberLeaves2*";
 
     @BeforeEach
@@ -27,36 +27,35 @@ public class SeleniumMailYandexTest {
     @Test
     void loginYandexMailTest()
     {
-
-        FindLocatorClass find = new FindLocatorClass();
         driver.get("https://mail.yandex.com");
-        WebElement loginButton = find.getWebElementByLocatorParameter(driver, LocationByType.XPATH, "//div[@class='PSHeader-Right']//button");
+
+        WebElement loginButton = driver.findElement(By.xpath("//div[@class='PSHeader-Right']//button"));
 
         Assertions.assertTrue(loginButton.isDisplayed(), "The login button is displayed");
         loginButton.click();
 
-        WebElement loginInput = find.getWebElementByLocatorParameter(driver, LocationByType.XPATH, "//input[@id='passp-field-login']");
-        loginInput.sendKeys(log_name);
+        WebElement loginInput = driver.findElement(By.id("passp-field-login"));
+        loginInput.sendKeys(logName);
 
-        WebElement signInButton = find.getWebElementByLocatorParameter(driver, LocationByType.XPATH, "//button[@id='passp:sign-in']");
+        WebElement signInButton = driver.findElement(By.id("passp:sign-in"));
         signInButton.click();
+
         WebElement passwordInput = new WebDriverWait(driver, Duration.ofSeconds(5))
-                .until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='passp-field-passwd']")));
-
+                .until(ExpectedConditions.elementToBeClickable(By.id("passp-field-passwd")));
         passwordInput.sendKeys(pass);
-        WebElement signInButton2 = new WebDriverWait(driver, Duration.ofSeconds(5))
-                .until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='passp:sign-in']")));
-        signInButton2.click();
 
-        WebElement telemostService = find.getWebElementByLocatorParameter(driver, LocationByType.XPATH, "//span[@class='PSHeaderService-Text' and text()='Telemost']");
+        WebElement signInConfirmButton = new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.elementToBeClickable(By.id("passp:sign-in")));
+        signInConfirmButton.click();
+
+        WebElement telemostService = driver.findElement(By.xpath("//span[@class='PSHeaderService-Text' and text()='Telemost']"));
         Assertions.assertTrue(telemostService.getText().equals("Telemost"));
 
-        WebElement composeLink = find.getWebElementByLocatorParameter(driver, LocationByType.XPATH, "//a[@href='#compose']");
+        WebElement composeLink = driver.findElement(By.linkText("#compose"));
         Assertions.assertTrue(composeLink.isDisplayed());
 
-        WebElement labelRemindMe = find.getWebElementByLocatorParameter(driver, LocationByType.XPATH, "//div[@title='Remind me later']");
+        WebElement labelRemindMe = driver.findElement(By.cssSelector("div[title='Remind me later']"));
         Assertions.assertEquals("div", labelRemindMe.getTagName());
-
     }
 
     @AfterEach
