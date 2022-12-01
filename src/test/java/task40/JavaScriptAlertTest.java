@@ -1,27 +1,23 @@
 package task40;
 
-import org.openqa.selenium.*;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.WebElement;
+import task40.helpes.BaseTest;
 
-public class JavaScriptAlertTest {
-    private WebDriver driver;
+import static task40.helpes.TestConstants.*;
 
-    @BeforeEach
-    void setUp()
-    {
-        driver = new ChromeDriver();
+public class JavaScriptAlertTest extends BaseTest {
+
+    public JavaScriptAlertTest() {
+        super(JAVA_SCRIPT_ALERT_URL);
     }
-    @Test
-    public void alertTextTest()
-    {
-        driver.get("https://demo.seleniumeasy.com/javascript-alert-box-demo.html");
-        driver.manage().window().fullscreen();
 
+    @Test
+    public void alertTextTest() {
         WebElement button = driver.findElement(By.xpath("//button[@onclick='myAlertFunction()']"));
         button.click();
 
@@ -38,10 +34,5 @@ public class JavaScriptAlertTest {
         } catch (NoAlertPresentException e) {
             e.printStackTrace();
         }
-    }
-    @AfterEach
-    void cleanUp()
-    {
-        driver.quit();
     }
 }

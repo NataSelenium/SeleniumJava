@@ -1,22 +1,21 @@
 package task40;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.WebElement;
+import task40.helpes.BaseTest;
 
-public class JavaScriptConfirmationBoxTest {
-    private WebDriver driver;
+import static task40.helpes.TestConstants.*;
 
-    @BeforeEach
-    void setUp()
-    {
-        driver = new ChromeDriver();
-        driver.get("https://demo.seleniumeasy.com/javascript-alert-box-demo.html");
-        driver.manage().window().fullscreen();
+public class JavaScriptConfirmationBoxTest extends BaseTest {
+
+    public JavaScriptConfirmationBoxTest() {
+        super(JAVA_SCRIPT_CONFIRMATION_BOX_URL);
     }
+
     @Test
     public void confirmAcceptBoxTest()
     {
@@ -33,6 +32,7 @@ public class JavaScriptConfirmationBoxTest {
             e.printStackTrace();
         }
     }
+
     @Test
     public void confirmCancelBoxTest()
     {
@@ -49,6 +49,7 @@ public class JavaScriptConfirmationBoxTest {
             e.printStackTrace();
         }
     }
+
     @Test
     public void confirmMessageBoxTest()
     {
@@ -63,10 +64,5 @@ public class JavaScriptConfirmationBoxTest {
         } catch (NoAlertPresentException e) {
             e.printStackTrace();
         }
-    }
-    @AfterEach
-    void cleanUp()
-    {
-        driver.quit();
     }
 }

@@ -9,17 +9,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class LoginPage {
-    private static final String URL = "https://mail.yandex.com";
-    private final WebDriver driver;
-
-    public LoginPage(WebDriver driver) {
-        this.driver = driver;
-        this.driver.get(URL);
-        this.driver.manage().window().fullscreen();
-    }
-
-    public void enterCredential(String login, String password) throws InterruptedException {
+public class LoginPage
+{
+    public void enterCredential(WebDriver driver, String login, String password) throws InterruptedException {
         WebElement loginButton = driver.findElement(By.xpath("//div[@class='PSHeader-Right']//button"));
         Assertions.assertTrue(loginButton.isDisplayed(), "The login button is displayed");
         loginButton.click();
