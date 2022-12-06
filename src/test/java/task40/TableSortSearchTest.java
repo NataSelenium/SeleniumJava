@@ -2,7 +2,6 @@ package task40;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.support.ui.Select;
 import task40.helpes.BaseTest;
 import task40.helpes.Employee;
 import task40.helpes.TableSortSearchPage;
@@ -15,7 +14,7 @@ import static task40.helpes.TestConstants.*;
 public class TableSortSearchTest extends BaseTest {
     private final int ageOption = 25;
     private final int salaryOption = 150000;
-    private final String tableCssSelector = "table#example tbody";
+
     private List<Employee> customEmployeeList, expectedEmployeeList = new ArrayList<Employee>();
 
     public TableSortSearchTest() {
@@ -26,10 +25,9 @@ public class TableSortSearchTest extends BaseTest {
     void tableSortSearchTest() throws InterruptedException {
         List<Employee> actualEmployeeList = new ArrayList<Employee>();
         TableSortSearchPage page = new TableSortSearchPage(super.driver);
-        Select select = page.getWebElementByName("example_length");
-        select.selectByValue("10");
+        page.selectDropDownOption();
 
-        page.collectTableDataList(tableCssSelector, actualEmployeeList);
+        page.collectTableDataList(actualEmployeeList);
         customEmployeeList = page.getCustomDataTableList(actualEmployeeList, ageOption, salaryOption);
         expectedEmployeeList = getExpectedEmployeeList();
 

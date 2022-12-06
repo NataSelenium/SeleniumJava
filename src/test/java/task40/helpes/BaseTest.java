@@ -4,8 +4,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import java.util.ArrayList;
-import java.util.List;
 
 public class BaseTest {
     protected WebDriver driver;
@@ -25,19 +23,5 @@ public class BaseTest {
     @AfterEach
     protected void cleanUp() {
         driver.quit();
-    }
-
-    protected List<Integer> getUniqueList(int size)
-    {
-        List<Integer> uniqueList = new ArrayList<Integer>();
-        while (uniqueList.size() !=size)
-        {
-            int randomInteger = (int)(Math.random()*8);
-            if (!uniqueList.contains(randomInteger))
-            {
-                uniqueList.add(randomInteger);
-            }
-        }
-        return  uniqueList;
     }
 }

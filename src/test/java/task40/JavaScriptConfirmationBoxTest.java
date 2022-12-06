@@ -3,10 +3,10 @@ package task40;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebElement;
 import task40.helpes.BaseTest;
+import task40.helpes.JavaScriptConfirmationBoxPage;
 
 import static task40.helpes.TestConstants.*;
 
@@ -19,13 +19,14 @@ public class JavaScriptConfirmationBoxTest extends BaseTest {
     @Test
     public void confirmAcceptBoxTest()
     {
-        WebElement button = driver.findElement(By.xpath("//button[@onclick='myConfirmFunction()']"));
+        JavaScriptConfirmationBoxPage page = new JavaScriptConfirmationBoxPage(super.driver);
+        WebElement button = page.getButtonWebElement();
         button.click();
 
         try {
             Alert alert = driver.switchTo().alert();
             alert.accept();
-            WebElement message = driver.findElement(By.id("confirm-demo"));
+            WebElement message = page.getAlertMessageText();
             Assertions.assertEquals("You pressed OK!", message.getText());
 
         } catch (NoAlertPresentException e) {
@@ -36,13 +37,14 @@ public class JavaScriptConfirmationBoxTest extends BaseTest {
     @Test
     public void confirmCancelBoxTest()
     {
-        WebElement button = driver.findElement(By.xpath("//button[@onclick='myConfirmFunction()']"));
+        JavaScriptConfirmationBoxPage page = new JavaScriptConfirmationBoxPage(super.driver);
+        WebElement button = page.getButtonWebElement();
         button.click();
 
         try {
             Alert alert = driver.switchTo().alert();
             alert.dismiss();
-            WebElement message = driver.findElement(By.id("confirm-demo"));
+            WebElement message = page.getAlertMessageText();
             Assertions.assertEquals("You pressed Cancel!", message.getText());
 
         } catch (NoAlertPresentException e) {
@@ -53,7 +55,8 @@ public class JavaScriptConfirmationBoxTest extends BaseTest {
     @Test
     public void confirmMessageBoxTest()
     {
-        WebElement button = driver.findElement(By.xpath("//button[@onclick='myConfirmFunction()']"));
+        JavaScriptConfirmationBoxPage page = new JavaScriptConfirmationBoxPage(super.driver);
+        WebElement button = page.getButtonWebElement();
         button.click();
 
         try {

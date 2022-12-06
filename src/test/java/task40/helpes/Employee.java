@@ -8,14 +8,15 @@ public class Employee {
     private String office;
     private int  age;
     private int  salary;
-public Employee(String empName, String empPosition, String empOffice, int empAge, int empSalary)
-{
-    this.name = empName;
-    this.position = empPosition;
-    this.office = empOffice;
-    this.age = empAge;
-    this.salary = empSalary;
-}
+
+    public Employee(String empName, String empPosition, String empOffice, int empAge, int empSalary)
+    {
+        this.name = empName;
+        this.position = empPosition;
+        this.office = empOffice;
+        this.age = empAge;
+        this.salary = empSalary;
+    }
 
     public Employee(String empName, String empPosition, String empOffice)
     {
@@ -23,6 +24,7 @@ public Employee(String empName, String empPosition, String empOffice, int empAge
         this.position = empPosition;
         this.office = empOffice;
     }
+
     public String getName() {
         return name;
     }
@@ -30,9 +32,11 @@ public Employee(String empName, String empPosition, String empOffice, int empAge
     public String getPosition() {
         return position;
     }
+
     public String getOffice() {
         return office;
     }
+
     public int getAge() {
         return age;
     }

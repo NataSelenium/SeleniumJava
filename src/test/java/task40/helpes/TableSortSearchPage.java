@@ -9,43 +9,43 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TableSortSearchPage {
-    WebDriver driver;
+    private final WebDriver driver;
     private final String nextButtonId = "example_next";
+    private final String selectName = "example_length";
+    private final String tableCssSelector = "table#example tbody";
+    private final String selectOption = "10";
 
     public TableSortSearchPage(WebDriver driver)
     {
         this.driver = driver;
     }
 
-    public Select getWebElementByName(String name)
+    public void selectDropDownOption()
     {
-        return  new Select(driver.findElement(By.name(name)));
+        Select select =  new Select(driver.findElement(By.name(selectName)));
+        select.selectByValue(selectOption);
     }
+
     public WebElement getWebElementById(String id)
     {
         return driver.findElement(By.id(id));
     }
 
-    public void collectTableDataList(String tableSelector, List<Employee> list)
+    public void collectTableDataList(List<Employee> list)
     {
         WebElement next = getWebElementById(nextButtonId);
         boolean buttonEnabledState = true;
         while (buttonEnabledState) {
-            WebElement table = driver.findElement(By.cssSelector(tableSelector));
+            WebElement table = driver.findElement(By.cssSelector(tableCssSelector));
             List<WebElement> rows =
                     table.findElements(By.tagName("tr"));
 
             for (WebElement row : rows) {
-                String employeeName = "";
-                String employeePosition = "";
-                String employeeOffice = "";
-                int employeeAge = 0;
-                int employeeSalary = 0;
-                employeeName = row.findElement(By.xpath("./td[1]")).getText();
-                employeePosition = row.findElement(By.xpath("./td[2]")).getText();
-                employeeOffice = row.findElement(By.xpath("./td[3]")).getText();
-                employeeAge = Integer.valueOf(row.findElement(By.xpath("./td[4]")).getText());
-                employeeSalary = Integer.valueOf(row.findElement(By.xpath("./td[6]")).getText().replaceAll("[^0-9]", ""));
+                String  employeeName = row.findElement(By.xpath("./td[1]")).getText();
+                String  employeePosition = row.findElement(By.xpath("./td[2]")).getText();
+                String employeeOffice = row.findElement(By.xpath("./td[3]")).getText();
+                int employeeAge = Integer.valueOf(row.findElement(By.xpath("./td[4]")).getText());
+                int employeeSalary = Integer.valueOf(row.findElement(By.xpath("./td[6]")).getText().replaceAll("[^0-9]", ""));
 
                 if (employeeName.length() > 1) {
                     Employee emp = new Employee(employeeName, employeePosition, employeeOffice, employeeAge, employeeSalary);

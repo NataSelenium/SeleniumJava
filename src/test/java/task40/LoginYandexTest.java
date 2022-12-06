@@ -22,8 +22,8 @@ public class LoginYandexTest extends BaseTest {
             "RoseMagic16,         November5%",
     })
     void loginYandexMailTest(String logName, String  pass) throws InterruptedException {
-        LoginPage loginPage = new LoginPage();
-        loginPage.enterCredential(driver, logName, pass);
+        LoginPage loginPage = new LoginPage(super.driver);
+        loginPage.enterCredential(logName, pass);
 
         //Implicit wait - test scenario is stopped for 2000 milliseconds
         Thread.sleep(2000);

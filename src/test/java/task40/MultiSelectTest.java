@@ -2,9 +2,9 @@ package task40;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 import task40.helpes.BaseTest;
+import task40.helpes.MultiSelectPage;
 
 import java.util.List;
 
@@ -20,8 +20,9 @@ public class MultiSelectTest extends BaseTest {
     @Test
     void multiSelectTest()
     {
-        Select select = new Select(driver.findElement(By.id("multi-select")));
-        List<Integer> list = getUniqueList(selectedOptionsCount);
+        MultiSelectPage page = new MultiSelectPage(super.driver);
+        Select select = page.getSelectWelElement();
+        List<Integer> list = page.getUniqueList(selectedOptionsCount);
 
         for (int index:list)
         {      select.selectByIndex(index);     }
