@@ -1,4 +1,4 @@
-package task40.helpes;
+package task40.util;
 
 import java.util.Objects;
 
@@ -11,18 +11,18 @@ public class Employee {
 
     public Employee(String empName, String empPosition, String empOffice, int empAge, int empSalary)
     {
-        this.name = empName;
-        this.position = empPosition;
-        this.office = empOffice;
-        this.age = empAge;
-        this.salary = empSalary;
+        name = empName;
+        position = empPosition;
+        office = empOffice;
+        age = empAge;
+        salary = empSalary;
     }
 
     public Employee(String empName, String empPosition, String empOffice)
     {
-        this.name = empName;
-        this.position = empPosition;
-        this.office = empOffice;
+        name = empName;
+        position = empPosition;
+        office = empOffice;
     }
 
     public String getName() {

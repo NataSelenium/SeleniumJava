@@ -1,11 +1,11 @@
-package task40.helpes;
+package task40.test;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class BaseTest {
+public abstract class BaseTest {
     protected WebDriver driver;
     private String url;
 

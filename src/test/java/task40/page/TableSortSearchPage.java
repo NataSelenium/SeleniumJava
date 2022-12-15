@@ -1,18 +1,19 @@
-package task40.helpes;
+package task40.page;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import task40.util.Employee;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TableSortSearchPage {
     private final WebDriver driver;
-    private final String nextButtonId = "example_next";
-    private final String selectName = "example_length";
-    private final String tableCssSelector = "table#example tbody";
+    private By nextButtonBy = By.id("example_next");
+    private By selectBy = By.name("example_length");
+    private By tableBy = By.cssSelector("table#example tbody");
     private final String selectOption = "10";
 
     public TableSortSearchPage(WebDriver driver)
@@ -22,21 +23,16 @@ public class TableSortSearchPage {
 
     public void selectDropDownOption()
     {
-        Select select =  new Select(driver.findElement(By.name(selectName)));
+        Select select =  new Select(driver.findElement(selectBy));
         select.selectByValue(selectOption);
-    }
-
-    public WebElement getWebElementById(String id)
-    {
-        return driver.findElement(By.id(id));
     }
 
     public void collectTableDataList(List<Employee> list)
     {
-        WebElement next = getWebElementById(nextButtonId);
+        WebElement next = driver.findElement(nextButtonBy);
         boolean buttonEnabledState = true;
         while (buttonEnabledState) {
-            WebElement table = driver.findElement(By.cssSelector(tableCssSelector));
+            WebElement table = driver.findElement(tableBy);
             List<WebElement> rows =
                     table.findElements(By.tagName("tr"));
 
@@ -52,24 +48,15 @@ public class TableSortSearchPage {
                     list.add(emp);
                 }
             }
-            this.clickNextButton(next);
-            next = getWebElementById(nextButtonId);
-            buttonEnabledState = this.getNextButtonEnabledState(next);
+            clickNextButton(next);
+            next = driver.findElement(nextButtonBy);
+            buttonEnabledState = getNextButtonEnabledState(next);
         }
     }
 
         private boolean getNextButtonEnabledState(WebElement button)
         {
-            boolean state = true;
-            if (button.getAttribute("class").contains("disabled"))
-            {
-                state = false;
-            }
-            else
-            {
-                state = true;
-            }
-            return  state;
+            return !button.getAttribute("class").contains("disabled");
         }
 
         private void clickNextButton(WebElement nextButton)
