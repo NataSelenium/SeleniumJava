@@ -11,10 +11,10 @@ import java.util.regex.Pattern;
 
 public class DownloadPercentagePage {
     private final WebDriver driver;
-    private By buttonBy = By.id("cricle-btn");
-    private By percentTextBy = By.className("percenttext");
-    private String percentsText = "50%";
-    private String zeroPercentText = "0%";
+    private final By buttonBy = By.id("cricle-btn");
+    private final By percentTextBy = By.className("percenttext");
+    private final String percentsText = "50%";
+    private final String zeroPercentText = "0%";
 
     public DownloadPercentagePage(WebDriver driver)
     {

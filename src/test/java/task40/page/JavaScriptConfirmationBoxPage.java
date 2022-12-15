@@ -6,8 +6,8 @@ import org.openqa.selenium.WebDriver;
 
 public class JavaScriptConfirmationBoxPage {
     private final WebDriver driver;
-    private By buttonBy = By.xpath("//button[@onclick='myConfirmFunction()']");
-    private By messageBy = By.id("confirm-demo");
+    private final By buttonBy = By.xpath("//button[@onclick='myConfirmFunction()']");
+    private final By messageBy = By.id("confirm-demo");
 
     public JavaScriptConfirmationBoxPage (WebDriver driver)
     {

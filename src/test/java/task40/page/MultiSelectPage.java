@@ -10,7 +10,7 @@ import java.util.List;
 
 public class MultiSelectPage {
         private final WebDriver driver;
-        private By selectBy = By.id("multi-select");
+        private final By selectBy = By.id("multi-select");
         private Select mySelect;
 
         public MultiSelectPage(WebDriver driver)

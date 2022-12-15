@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 
 public class JavaScriptAlertPage {
     private final WebDriver driver;
-    private By buttonBy = By.xpath("//button[@onclick='myAlertFunction()']");
+    private final By buttonBy = By.xpath("//button[@onclick='myAlertFunction()']");
 
     public JavaScriptAlertPage(WebDriver driver)
     {
