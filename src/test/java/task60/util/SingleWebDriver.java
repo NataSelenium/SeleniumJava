@@ -5,18 +5,28 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public final class SingleWebDriver {
     private static SingleWebDriver instance;
-    public WebDriver driver;
+    private WebDriver driver;
 
-    public SingleWebDriver(WebDriver driver){
-        this.driver = driver;
+    private SingleWebDriver()
+    {
+        driver = new ChromeDriver();
     }
 
-    public static WebDriver getInstance(WebDriver driver)
+    public static SingleWebDriver getWebDriverInstance()
     {
         if (instance == null) {
-            driver = new ChromeDriver();
-            instance = new SingleWebDriver(driver);
+            instance = new SingleWebDriver();
         }
+        return instance;
+    }
+
+    public WebDriver getDriver()
+    {
         return driver;
+    }
+
+    public void closeDriver()
+    {
+        driver.close();
     }
 }
