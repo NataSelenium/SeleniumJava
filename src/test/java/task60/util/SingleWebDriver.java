@@ -7,10 +7,7 @@ public final class SingleWebDriver {
     private static SingleWebDriver instance;
     private WebDriver driver;
 
-    private SingleWebDriver()
-    {
-        driver = new ChromeDriver();
-    }
+    private SingleWebDriver() {}
 
     public static SingleWebDriver getWebDriverInstance()
     {
@@ -22,11 +19,14 @@ public final class SingleWebDriver {
 
     public WebDriver getDriver()
     {
+        if (driver == null)
+        {driver = new ChromeDriver();}
         return driver;
     }
 
     public void closeDriver()
     {
         driver.close();
+        driver = null;
     }
 }
