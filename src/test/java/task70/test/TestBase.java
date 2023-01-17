@@ -15,13 +15,13 @@ public abstract class TestBase {
 
     @BeforeEach
     protected void setUp() {
-        driver = SingleWebDriver.getInstance(driver);
+        driver = SingleWebDriver.getWebDriverInstance().getDriver();
         driver.get(this.url);
         driver.manage().window().fullscreen();
     }
 
     @AfterEach
     protected void cleanUp() {
-        driver.quit();
+        SingleWebDriver.getWebDriverInstance().closeDriver();
     }
 }
