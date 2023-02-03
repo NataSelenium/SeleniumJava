@@ -29,4 +29,14 @@ public final class SingleWebDriver {
         driver.close();
         driver = null;
     }
+
+    public String getBrowserName()
+    {
+        return ((ChromeDriver)driver).getCapabilities().getBrowserName();
+    }
+
+    public String getBrowserVersion()
+    {
+        return ((ChromeDriver)driver).getCapabilities().getBrowserVersion();
+    }
 }
