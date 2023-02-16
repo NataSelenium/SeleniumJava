@@ -1,5 +1,6 @@
 package task70.page;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -31,6 +32,7 @@ public class LoginPage{
         PageFactory.initElements(driver, this);
     }
 
+    @Step("Login method")
     public HomePage logIn(String log, String pass) throws InterruptedException {
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(loginButton)).click();
@@ -48,6 +50,7 @@ public class LoginPage{
         return new HomePage(driver);
     }
 
+    @Step("Verify if Login Page is displayed")
     public boolean isLoginPagePresent() {
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(loginButton));
         return loginButton.isDisplayed();

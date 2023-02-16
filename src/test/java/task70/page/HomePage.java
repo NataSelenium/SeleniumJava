@@ -1,5 +1,6 @@
 package task70.page;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,12 +25,20 @@ public class HomePage {
         PageFactory.initElements(driver, this);
     }
 
+    @Step("Verify if Home Page is displayed")
     public boolean isHomePagePresent() {
         driver.manage().window().fullscreen();
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(composeLink));
         return composeLink.isDisplayed();
     }
 
+    @Step("Verify if Home Page is displayed failed")
+    public boolean isHomePagePresentFailed() {
+        driver.manage().window().fullscreen();
+        return driver.getTitle().equals("Wrong title");
+    }
+
+    @Step("Logout method")
     public LoginPage logOut(String log)
     {
         if (isHomePagePresent())
