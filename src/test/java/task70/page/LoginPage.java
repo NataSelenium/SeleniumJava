@@ -14,7 +14,7 @@ public class LoginPage{
     private WebDriver driver;
     private WebDriverWait wait;
 
-    @FindBy(xpath = "//div[@class='PSHeader-Right']//button")
+    @FindBy(xpath = "//a[contains(@href,'auth')]")
     WebElement loginButton;
 
     @FindBy(id = "passp-field-login")

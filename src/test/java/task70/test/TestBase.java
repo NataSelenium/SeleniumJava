@@ -16,13 +16,8 @@ public abstract class TestBase {
 
     @BeforeEach
     protected void setUp() throws MalformedURLException {
-        driver = SingleWebDriver.getWebDriverInstance().getRemoveWebDriver();
+        driver = SingleWebDriver.getWebDriverInstance().getSauceLabsWebDriver();
         driver.get(this.url);
         driver.manage().window().fullscreen();
-    }
-
-    @AfterEach
-    protected void cleanUp() {
-        SingleWebDriver.getWebDriverInstance().closeDriver();
     }
 }

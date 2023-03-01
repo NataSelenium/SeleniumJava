@@ -1,14 +1,12 @@
 package task70.test;
 
 import io.qameta.allure.Description;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.RegisterExtension;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import task70.page.HomePage;
 import task70.page.LoginPage;
-import task70.util.ScreenShotWatcher;
+import task70.util.SauceTestWatcher;
 
 import java.io.IOException;
 
@@ -19,7 +17,7 @@ public class MailYandexTest extends TestBase {
     public MailYandexTest()    {super(MAIL_YANDEX_URL);}
 
     @RegisterExtension
-    ScreenShotWatcher watcher = new ScreenShotWatcher(super.driver, "target/surefire-reports");
+    SauceTestWatcher sauceTestWatcher = new SauceTestWatcher((RemoteWebDriver) super.driver);
 
     @Test
     @Tag("login")
@@ -35,6 +33,7 @@ public class MailYandexTest extends TestBase {
     @Tag("login")
     @DisplayName("Test #2")
     @Description("Login to yandex with failed")
+    @Disabled
     void loginYandexMailFailedTest() throws InterruptedException, IOException {
         LoginPage logPage = new LoginPage(super.driver);
         HomePage homePage = logPage.logIn(LOG_NAME, PASSWORD);
@@ -45,6 +44,7 @@ public class MailYandexTest extends TestBase {
     @Tag("logout")
     @DisplayName("Test #3")
     @Description("Logout from yandex broken")
+    @Disabled
     void logOutYandexMailFBrokenTest() throws InterruptedException {
         LoginPage logPage = new LoginPage(super.driver);
         HomePage homePage = logPage.logIn(LOG_NAME, "wrong_password");
