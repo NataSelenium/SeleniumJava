@@ -2,6 +2,13 @@ package task70.util;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import static task70.util.TestConfig.*;
 
 public final class SingleWebDriver {
     private static SingleWebDriver instance;
@@ -21,6 +28,17 @@ public final class SingleWebDriver {
     {
         if (driver == null)
         {driver = new ChromeDriver();}
+        return driver;
+    }
+
+    public WebDriver getRemoveWebDriver() throws MalformedURLException {
+        if (driver == null)
+        {
+            ChromeOptions chromeOptions = new ChromeOptions();
+            chromeOptions.setCapability("platformName", OS_LINUX);
+            driver = new RemoteWebDriver(new URL(
+                    URL_HUB), chromeOptions);
+        }
         return driver;
     }
 
