@@ -11,5 +11,5 @@ public class TestConfig {
     public static final String SAUCE_URL = "https://nianile83:03ca93d5-e3e5-4a20-be40-cd86b7454d97@ondemand.eu-central-1.saucelabs.com:443/wd/hub";
     public static final String BUILD_ID = "selenium-build-ZUSDK";
     public static final String TEST_NAME = "Natalia Tests";
-    public static final String TEST_CONFIGURATION = "Windows 10 Microsoft Edge latest"; //"Windows 10 Microsoft Edge latest", "Windows 8.1 Firefox 39", "Linux Google Chrome 40"
+    public static final String TEST_CONFIGURATION = "WIN10"; //"WIN10", "WIN8.1", "LINUX"
 }

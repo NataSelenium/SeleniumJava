@@ -48,10 +48,10 @@ public final class SingleWebDriver {
     }
 
     public RemoteWebDriver getSauceLabsWebDriver() throws MalformedURLException {
-        MutableCapabilities multcaps = null; //= new MutableCapabilities();
+        MutableCapabilities multcaps = null;
         switch (TEST_CONFIGURATION)
         {
-            case "Windows 10 Microsoft Edge latest":
+            case "WIN10":
             {
                 EdgeOptions browserOptions = new EdgeOptions();
                 browserOptions.setPlatformName("Windows 10");
@@ -63,7 +63,7 @@ public final class SingleWebDriver {
                 multcaps = browserOptions;
                 break;
             }
-            case "Windows 8.1 Firefox 39":
+            case "WIN8.1":
             {
                 DesiredCapabilities caps = new DesiredCapabilities();
                 caps.setCapability("browserName", "firefox");
@@ -74,7 +74,7 @@ public final class SingleWebDriver {
                 multcaps = caps;
                 break;
             }
-            case "Linux Google Chrome 40":
+            case "LINUX":
             {
                 DesiredCapabilities caps = new DesiredCapabilities();
                 caps.setCapability("browserName", "chrome");
