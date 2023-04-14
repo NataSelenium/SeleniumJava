@@ -46,11 +46,11 @@ public class AddressBookPage {
 
     private String streetAddressTest = "White str 123";
 
-    private String cityTest = "Kansas City";
+    private String cityTest = "Test City";
 
-    private String stateTest = "Missouri";
+    private String stateTest = "Alaska";
 
-    private String zipTest = "65127";
+    private String zipTest = "12345";
 
     public AddressBookPage(WebDriver driver) {
         this.driver = driver;

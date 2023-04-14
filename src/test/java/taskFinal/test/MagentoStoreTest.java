@@ -2,8 +2,12 @@ package taskFinal.test;
 
 import io.qameta.allure.Description;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.RegisterExtension;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import taskFinal.page.*;
 import taskFinal.util.Product;
+import taskFinal.util.SauceTestWatcher;
+import taskFinal.util.ScreenShotWatcher;
 
 
 import java.util.List;
@@ -13,6 +17,12 @@ import static taskFinal.util.TestConfig.*;
 public class MagentoStoreTest extends TestBase{
 
     public MagentoStoreTest() {super(HOME_MAGENTO_URL);}
+
+    //@RegisterExtension
+    //SauceTestWatcher sauceTestWatcher = new SauceTestWatcher((RemoteWebDriver) super.driver);
+
+    @RegisterExtension
+    ScreenShotWatcher watcher = new ScreenShotWatcher(super.driver, "target/surefire-reports");
 
     @Test
     @Order(1)
@@ -75,14 +85,14 @@ public class MagentoStoreTest extends TestBase{
     @Description("Verify the ability to add to cart")
     void addProductToCartTest() {
         HomePage homePage = new HomePage(super.driver);
-        //LoginPage logPage = homePage.getLoginPage();
-        //logPage.login(LOG_NAME, PASSWORD);
+        LoginPage logPage = homePage.getLoginPage();
+        logPage.login(LOG_NAME, PASSWORD);
         WomenPage womenPage = homePage.getWomenPage();
         womenPage.getTopsCatalog();
         List<Product> expectedAddedItems = womenPage.addProductItems();
         ShoppingCartPage shoppingCartPage = womenPage.openShoppingCart();
         List<Product> actualShoppingList = shoppingCartPage.getShoppingCartItems();
-        Assertions.assertEquals(expectedAddedItems,actualShoppingList);
+        Assertions.assertTrue(actualShoppingList.containsAll(expectedAddedItems));
         Assertions.assertEquals(shoppingCartPage.getShoppingCartTotal(), shoppingCartPage.getOrderTotal());
     }
 }

@@ -1,12 +1,10 @@
 package taskFinal.test;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import taskFinal.util.SingleWebDriver;
 
-import static taskFinal.util.TestConfig.*;
-
+import java.net.MalformedURLException;
 
 public abstract class TestBase {
     protected WebDriver driver;
@@ -17,14 +15,9 @@ public abstract class TestBase {
     }
 
     @BeforeEach
-    protected void setUp() {
-        driver = SingleWebDriver.getWebDriverInstance().getBrowserDriver(BROWSER_TYPE);
+    protected void setUp() throws MalformedURLException {
+        driver = SingleWebDriver.getWebDriverInstance().getTargetWebDriver();
         driver.get(this.url);
         driver.manage().window().fullscreen();
-    }
-
-    @AfterEach
-    protected void cleanUp() {
-        SingleWebDriver.getWebDriverInstance().closeDriver();
     }
 }

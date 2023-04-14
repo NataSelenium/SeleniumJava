@@ -61,11 +61,9 @@ public class WomenPage {
             Double price = Double.valueOf(productPrice.getText().replace("$", ""));
             productItem.findElement(By.cssSelector("button[title='Add to Cart']")).click();
             collectedProducts.add(new Product(productName, "M", productColor.getAttribute("option-label"), price));
-            //System.out.println(productName);
             new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.elementToBeClickable(viewShoppingCartLink));
             new WebDriverWait(driver, Duration.ofSeconds(12)).until(ExpectedConditions.textToBePresentInElement(addedProductLabel, productName));
         }
-        //for (Product p: collectedProducts)        {            System.out.println(p.getName() + " " + p.getSize() + ", " + p.getColor() + ", " + p.getPrice());        }
         return collectedProducts;
     }
 
