@@ -5,11 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
+import taskFinal.util.Address;
 
 public class AddressBookPage {
 
@@ -39,45 +36,35 @@ public class AddressBookPage {
     @FindBy(xpath = "//tbody/tr[1]")
     WebElement addressTable;
 
-    @FindBy(xpath="//tbody/tr[1]/td[4]")
-    WebElement addedCity;
-
-    private String phoneNumberTest = "+1122223344";
-
-    private String streetAddressTest = "White str 123";
-
-    private String cityTest = "Test City";
-
-    private String stateTest = "Alaska";
-
-    private String zipTest = "12345";
-
     public AddressBookPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
-    public void addNewAddress()
+    public Address addNewAddress(Address address)
     {
         driver.manage().window().fullscreen();
         addNewAddressButton.click();
-        phoneNumberInput.sendKeys(phoneNumberTest);
-        streetInput.sendKeys(streetAddressTest);
-        cityInput.sendKeys(cityTest);
+        phoneNumberInput.sendKeys(address.getCell());
+        streetInput.sendKeys(address.getStreet());
+        cityInput.sendKeys(address.getCity());
         Select select = new Select(stateSelect);
-        select.selectByVisibleText(stateTest);
-        zipInput.sendKeys(zipTest);
+        select.selectByVisibleText(address.getState());
+        zipInput.sendKeys(address.getZip());
         saveButton.click();
+        return address;
     }
 
-    public boolean isNewAddressAdded()
+    public Address getActualAddress()
     {
-        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(addedCity));
-        return  (
-                addressTable.findElement(By.xpath("./td[3]")).getText().contains(streetAddressTest) &&
-                addressTable.findElement(By.xpath("./td[4]")).getText().contains(cityTest) &&
-                addressTable.findElement(By.xpath("./td[6]")).getText().contains(stateTest) &&
-                addressTable.findElement(By.xpath("./td[7]")).getText().contains(zipTest)
-                );
+        Address actualAddress;
+        actualAddress = new Address(
+                addressTable.findElement(By.xpath("./td[8]")).getText(),
+                addressTable.findElement(By.xpath("./td[3]")).getText(),
+                addressTable.findElement(By.xpath("./td[4]")).getText(),
+                addressTable.findElement(By.xpath("./td[6]")).getText(),
+                addressTable.findElement(By.xpath("./td[7]")).getText()
+        );
+        return actualAddress;
     }
 }

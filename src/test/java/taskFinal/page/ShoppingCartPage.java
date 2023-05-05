@@ -1,8 +1,6 @@
 package taskFinal.page;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -43,12 +41,30 @@ public class ShoppingCartPage {
         return shoppingCartProducts;
     }
 
+    public void cleanShoppingCart()
+    {
+        List<WebElement> prodItems = driver.findElements(By.cssSelector("tbody.cart.item"));
+        for (int i = 1; i <=prodItems.size(); i++)
+        {
+            try {
+                //Try to remove item from cart
+                driver.findElement(By.xpath("(//td//a[@class='action action-delete'])[position()=1]")).click();
+            } catch(StaleElementReferenceException e) {
+                System.out.println("StaleElementReferenceException: " + e.getMessage());
+            }
+            finally {
+                //Refresh the page after every deletion
+                driver.navigate().refresh();
+            }
+        }
+    }
+
     public double getShoppingCartTotal()
     {
         double total = 0.00;
         List<WebElement> prodItems = productTable.findElements(By.cssSelector("tbody.cart.item"));
         for (WebElement item: prodItems) {
-            WebElement prodPrice = item.findElement(By.cssSelector("td.col.price span.price"));
+            WebElement prodPrice = item.findElement(By.cssSelector("td.col.subtotal span.price"));
             Double price = Double.valueOf(prodPrice.getText().replace("$", ""));
         total=total+price;
         }

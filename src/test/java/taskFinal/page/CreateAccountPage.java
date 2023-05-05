@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import static taskFinal.util.TestConfig.*;
+
 public class CreateAccountPage {
 
     private WebDriver driver;
@@ -27,14 +29,6 @@ public class CreateAccountPage {
     @FindBy(css = "button[title='Create an Account']")
     WebElement createAccountButton;
 
-    private String firstNameTest = "Natalia";
-
-    private String lastNameTest = "Damorad";
-
-    private String emailTest = "WhiteDecember12@yandex.com";
-
-    private String passTest = "TestPass3$";
-
     public CreateAccountPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -43,11 +37,11 @@ public class CreateAccountPage {
     public AccountPage addNewAccount()
     {
         int randomInteger = 1+ (int)(Math.random()*120);
-        firstNameInput.sendKeys(firstNameTest);
-        lastNameInput.sendKeys(lastNameTest);
-        emailAddressInput.sendKeys(randomInteger + emailTest);
-        passwordInput.sendKeys(passTest);
-        passwordConfirmationInput.sendKeys(passTest);
+        firstNameInput.sendKeys(FIRST_NAME_TEST);
+        lastNameInput.sendKeys(LAST_NAME_TEST);
+        emailAddressInput.sendKeys(randomInteger + EMAIL_TEST);
+        passwordInput.sendKeys(PASS_TEST);
+        passwordConfirmationInput.sendKeys(PASS_TEST);
         createAccountButton.click();
         return new AccountPage(driver);
     }

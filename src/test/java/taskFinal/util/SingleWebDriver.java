@@ -34,6 +34,7 @@ public final class SingleWebDriver {
             default:
                 System.out.println("Error - target is not defined");
         }
+        driver.manage().window().fullscreen();
         return driver;
     }
 
@@ -62,6 +63,7 @@ public final class SingleWebDriver {
                 System.out.println("Error - browser is not supported");
 
         }
+        driver.manage().window().fullscreen();
         return driver;
     }
 

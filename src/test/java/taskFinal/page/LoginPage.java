@@ -7,8 +7,6 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.time.Duration;
 
-import static taskFinal.util.TestConfig.*;
-
 public class LoginPage {
 
     private WebDriver driver;
@@ -29,8 +27,8 @@ public class LoginPage {
 
     public HomePage login(String log, String pass)
     {
-        loginInput.sendKeys(LOG_NAME);
-        passwordInput.sendKeys(PASSWORD);
+        loginInput.sendKeys(log);
+        passwordInput.sendKeys(pass);
         submitButton.click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.manage().window().fullscreen();

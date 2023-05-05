@@ -18,6 +18,5 @@ public abstract class TestBase {
     protected void setUp() throws MalformedURLException {
         driver = SingleWebDriver.getWebDriverInstance().getTargetWebDriver();
         driver.get(this.url);
-        driver.manage().window().fullscreen();
     }
 }

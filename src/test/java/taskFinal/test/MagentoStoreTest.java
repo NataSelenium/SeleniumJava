@@ -5,6 +5,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import taskFinal.page.*;
+import taskFinal.util.Address;
 import taskFinal.util.Product;
 import taskFinal.util.SauceTestWatcher;
 import taskFinal.util.ScreenShotWatcher;
@@ -54,13 +55,15 @@ public class MagentoStoreTest extends TestBase{
     @DisplayName("Test AP-3")
     @Description("Verify the ability to add address")
     void addNewAddressToAccountTest() {
+        Address address = Address.getDefaultAddress();
         HomePage homePage = new HomePage(super.driver);
         LoginPage logPage = homePage.getLoginPage();
         logPage.login(LOG_NAME, PASSWORD);
         AccountPage accountPage = homePage.getAccountPage();
         AddressBookPage addressBookPage = accountPage.getAddressBookPage();
-        addressBookPage.addNewAddress();
-        Assertions.assertTrue(addressBookPage.isNewAddressAdded());
+        Address expectedAddress =  addressBookPage.addNewAddress(address);
+        Address actualAddress = addressBookPage.getActualAddress();
+        Assertions.assertEquals(expectedAddress, actualAddress);
     }
 
     @Test
@@ -94,5 +97,6 @@ public class MagentoStoreTest extends TestBase{
         List<Product> actualShoppingList = shoppingCartPage.getShoppingCartItems();
         Assertions.assertTrue(actualShoppingList.containsAll(expectedAddedItems));
         Assertions.assertEquals(shoppingCartPage.getShoppingCartTotal(), shoppingCartPage.getOrderTotal());
+        shoppingCartPage.cleanShoppingCart();
     }
 }
