@@ -9,7 +9,7 @@ public class TestConfig {
     public static final String BUILD_ID = "selenium-build-0WETB";
     public static final String TEST_NAME = "Natalia Training Tests 2";
     public static final BrowserType BROWSER_TYPE = BrowserType.Chrome;
-    public static final String TARGET = "Local"; //Remote
+    public static final String TARGET = "LOCAL"; //REMOTE
 
     public static final String FIRST_NAME_TEST = "Nile";
     public static final String LAST_NAME_TEST = "Smith";

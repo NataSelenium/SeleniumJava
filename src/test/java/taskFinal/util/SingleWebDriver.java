@@ -25,10 +25,10 @@ public final class SingleWebDriver {
     public WebDriver getTargetWebDriver() throws MalformedURLException {
         switch (TARGET)
         {
-            case "Local":
+            case "LOCAL":
                 driver = getLocalDriver();
                 break;
-            case "Remote":
+            case "REMOTE":
                 driver = getSauceLabsWebDriver();
                 break;
             default:
@@ -61,9 +61,7 @@ public final class SingleWebDriver {
                 break;
             default:
                 System.out.println("Error - browser is not supported");
-
         }
-        driver.manage().window().fullscreen();
         return driver;
     }
 

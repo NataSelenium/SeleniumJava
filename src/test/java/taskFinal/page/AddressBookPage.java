@@ -5,8 +5,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import taskFinal.util.Address;
+
+import java.time.Duration;
 
 public class AddressBookPage {
 
@@ -44,6 +48,7 @@ public class AddressBookPage {
     public Address addNewAddress(Address address)
     {
         driver.manage().window().fullscreen();
+        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.elementToBeClickable(addNewAddressButton));
         addNewAddressButton.click();
         phoneNumberInput.sendKeys(address.getCell());
         streetInput.sendKeys(address.getStreet());
