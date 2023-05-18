@@ -5,11 +5,11 @@ import com.github.javafaker.Faker;
 import java.util.Objects;
 
 public class Address {
-    private static String cell;
-    private static String street;
-    private static String city;
-    private static String state;
-    private static String zip;
+    private String cell;
+    private String street;
+    private String city;
+    private String state;
+    private String zip;
 
     public Address(String cellNumber, String streetAddress, String cityAddress, String stateAddress, String zipCode)
     {
@@ -30,13 +30,8 @@ public class Address {
     {
         Faker faker = new Faker();
 
-        cell = faker.phoneNumber().cellPhone();
-        street = faker.address().streetAddress();
-        city = faker.address().city();
-        state = faker.address().state();
-        zip = faker.address().zipCode();
-
-        return new Address(cell, street, city, state, zip);
+        return new Address(faker.phoneNumber().cellPhone(), faker.address().streetAddress(),
+                faker.address().city(), faker.address().state(), faker.address().zipCode());
     }
 
     @Override

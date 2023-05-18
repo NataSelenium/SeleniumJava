@@ -43,20 +43,16 @@ public class ShoppingCartPage {
 
     public void cleanShoppingCart()
     {
-        List<WebElement> prodItems = driver.findElements(By.cssSelector("tbody.cart.item"));
-        for (int i = 1; i <=prodItems.size(); i++)
-        {
-            try {
-                //Try to remove item from cart
-                driver.findElement(By.xpath("(//td//a[@class='action action-delete'])[position()=1]")).click();
-            } catch(StaleElementReferenceException e) {
-                System.out.println("StaleElementReferenceException: " + e.getMessage());
-            }
-            finally {
-                //Refresh the page after every deletion
-                driver.navigate().refresh();
-            }
+        List<WebElement> prodItems;
+        do try {
+            driver.findElement(By.xpath("(//td//a[@class='action action-delete'])[position()=1]")).click();
+        } catch (StaleElementReferenceException e) {
+            System.out.println("StaleElementReferenceException: " + e.getMessage());
+        } finally {
+            driver.navigate().refresh();
+            prodItems = driver.findElements(By.cssSelector("tbody.cart.item"));
         }
+            while (prodItems.size() > 0);
     }
 
     public double getShoppingCartTotal()
